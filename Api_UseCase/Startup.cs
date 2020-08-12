@@ -25,6 +25,10 @@ namespace Api_UseCase
 			services.AddDbContext<WB_UseCaseContext>(item => item.UseSqlServer
 (Configuration.GetConnectionString("WBConnection")));
 			services.AddScoped<IServiceApi, ServiceApi>();
+			services.AddCors(option => option.AddPolicy("APIPolicy", builder => {
+				builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+
+			}));
 
 		}
 

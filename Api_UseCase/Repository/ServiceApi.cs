@@ -132,10 +132,10 @@ namespace Api_UseCase.Repository
 
                 if (post != null)
                 {
-                   // string sqlQuery = "EXEC [dbo].[GetProductByPriceGreaterThan1000] @EmpID = {0}";
-                    var x = db.Employee.FromSqlRaw(" execute dbo.GetEmployeeLevel @EmpID = {0}",empid).IgnoreQueryFilters();
-                    level = x.FirstOrDefault().EmployeeStatus;
-                    
+                    // string sqlQuery = "EXEC [dbo].[GetProductByPriceGreaterThan1000] @EmpID = {0}";
+                    var x = db.Employee.FromSqlRaw(" execute dbo.spGetEmployeeLevel @EmpID = {0}", empid).AsEnumerable();
+                    level = x.ToList().FirstOrDefault().EmployeeStatus;
+                    return level;
                 }
                 return level;
             }
